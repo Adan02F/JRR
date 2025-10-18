@@ -63,4 +63,11 @@ public class ReservaController {
             @RequestParam LocalDate fin) {
         return repo.findByFechaInicioLessThanEqualAndFechaFinGreaterThanEqual(inicio, fin);
     }
+	
+	@DeleteMapping("/{id}")
+	public void eliminar(@PathVariable Long id) {
+		if (repo.existsById(id)) {
+			repo.deleteById(id);
+		}
+	}
 }

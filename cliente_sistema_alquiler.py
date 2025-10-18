@@ -165,6 +165,33 @@ def buscar_reservas_por_fecha():
     else:
         print("Error:", r.status_code, r.text)
 
+# =============================
+# ELIMINAR CLIENTE Y RESERVA
+# =============================
+def eliminar_cliente():
+    id_cliente = input("ID del cliente a eliminar: ")
+    confirm = input(f"¿Seguro que deseas eliminar el cliente {id_cliente}? (s/n): ").lower()
+    if confirm == 's':
+        r = requests.delete(f"{BASE_URL}/clientes/{id_cliente}")
+        if r.status_code in (200, 204):
+            print("Cliente eliminado correctamente.")
+        else:
+            print("Error al eliminar cliente:", r.status_code, r.text)
+    else:
+        print("Operacion cancelada.")
+
+
+def eliminar_reserva():
+    id_reserva = input("ID de la reserva a eliminar: ")
+    confirm = input(f"¿Seguro que deseas eliminar la reserva {id_reserva}? (s/n): ").lower()
+    if confirm == 's':
+        r = requests.delete(f"{BASE_URL}/reservas/{id_reserva}")
+        if r.status_code in (200, 204):
+            print("Reserva eliminada correctamente.")
+        else:
+            print("Error al eliminar reserva:", r.status_code, r.text)
+    else:
+        print("Operacion cancelada.")
 
 
 # =============================
@@ -184,6 +211,8 @@ def menu():
 8. Buscar reservas por cliente
 9. Buscar reservas por vehiculo
 10. Buscar reservas por fecha
+11. Eliminar cliente
+12. Eliminar reserva
 0. Salir
 """)
         op = input("Seleccione una opcion: ")
@@ -207,6 +236,10 @@ def menu():
             buscar_reservas_por_vehiculo()
         elif op == "10":
             buscar_reservas_por_fecha()
+        elif op == "11":
+            eliminar_cliente()
+        elif op == "12":
+            eliminar_reserva()
         elif op == "0":
             print("Saliendo...")
             break

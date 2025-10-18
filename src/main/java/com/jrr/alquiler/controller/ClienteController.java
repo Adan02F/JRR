@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
+@CrossOrigin(origins = "*")
 public class ClienteController {
 
     @Autowired
@@ -26,6 +27,11 @@ public class ClienteController {
 	@GetMapping("/{id}")
 	public Cliente obtenerPorId(@PathVariable Long id) {
 		return clienteRepository.findById(id).orElse(null);
+	}
+
+	@DeleteMapping("/{id}")
+	public void eliminar(@PathVariable Long id) {
+		clienteRepository.deleteById(id);
 	}
 
 }
