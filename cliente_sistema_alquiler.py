@@ -141,7 +141,27 @@ def buscar_reservas_por_vehiculo():
         print(f"\n--- Reservas del Vehiculo {id_vehiculo} ---")
         for rsv in reservas:
             cliente_id = rsv.get('cliente', {}).get('id', 'N/A')
-            print(f"ID: {rsv['id']} | Estado: {rsv['estado']} | Cliente ID: {cliente_id}")
+            vehiculo_id = rsv.get('vehiculo', {}).get('id', 'N/A')
+            print(f"ID: {rsv['id']} | Estado: {rsv.get('estado', 'N/A')} | "
+                  f"Fecha inicio: {rsv.get('fechaInicio')} | Fecha fin: {rsv.get('fechaFin')} | "
+                  f"Cliente ID: {cliente_id} | Vehiculo ID: {vehiculo_id}")
+    else:
+        print("Error:", r.status_code, r.text)
+
+
+def buscar_reservas_por_fecha():
+    inicio = input("Fecha inicio (YYYY-MM-DD): ")
+    fin = input("Fecha fin (YYYY-MM-DD): ")
+    r = requests.get(f"{BASE_URL}/reservas/fecha", params={"inicio": inicio, "fin": fin})
+    if r.status_code == 200:
+        reservas = r.json()
+        print(f"\n--- Reservas entre {inicio} y {fin} ---")
+        for rsv in reservas:
+            cliente_id = rsv.get('cliente', {}).get('id', 'N/A')
+            vehiculo_id = rsv.get('vehiculo', {}).get('id', 'N/A')
+            print(f"ID: {rsv['id']} | Estado: {rsv.get('estado', 'N/A')} | "
+                  f"Fecha inicio: {rsv.get('fechaInicio')} | Fecha fin: {rsv.get('fechaFin')} | "
+                  f"Cliente ID: {cliente_id} | Vehiculo ID: {vehiculo_id}")
     else:
         print("Error:", r.status_code, r.text)
 
