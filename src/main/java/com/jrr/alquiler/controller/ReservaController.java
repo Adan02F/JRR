@@ -2,7 +2,12 @@ package com.jrr.alquiler.controller;
 
 import com.jrr.alquiler.model.Reserva;
 import com.jrr.alquiler.repository.ReservaRepository;
+import com.jrr.alquiler.repository.ClienteRepository;
+import com.jrr.alquiler.repository.VehiculoRepository;
+
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,11 +16,14 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ReservaController {
 
-    private final ReservaRepository repo;
+    @Autowired
+    private ReservaRepository repo;
 
-    public ReservaController(ReservaRepository repo) {
-        this.repo = repo;
-    }
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private VehiculoRepository vehiculoRepository;
 
     // Listar todas las reservas
     @GetMapping
@@ -26,6 +34,13 @@ public class ReservaController {
     // Crear una reserva (POST)
     @PostMapping
     public Reserva crear(@RequestBody Reserva r) {
+        // Asegura que cliente y vehiculo existan antes de guardar
+        if (r.getCliente() != null && r.getCliente().getId() != null) {
+            r.setCliente(clienteRepository.findById(r.getCliente().getId()).orElse(null));
+        }
+        if (r.getVehiculo() != null && r.getVehiculo().getId() != null) {
+            r.setVehiculo(vehiculoRepository.findById(r.getVehiculo().getId()).orElse(null));
+        }
         return repo.save(r);
     }
 

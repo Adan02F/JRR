@@ -22,4 +22,10 @@ public class ClienteController {
     public List<Cliente> listarClientes() {
         return clienteRepository.findAll();
     }
+	
+	@GetMapping("/{id}")
+	public Cliente obtenerPorId(@PathVariable Long id) {
+		return clienteRepository.findById(id).orElse(null);
+	}
+
 }

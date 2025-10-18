@@ -30,4 +30,10 @@ public class VehiculoController {
     public void eliminar(@PathVariable Long id) {
         repo.deleteById(id);
     }
+	
+	@GetMapping("/{id}")
+	public Vehiculo obtenerPorId(@PathVariable Long id) {
+		return repo.findById(id).orElse(null);
+	}
+
 }

@@ -1,0 +1,10 @@
+com\jrr\alquiler\model\Cliente.class
+com\jrr\alquiler\repository\ClienteRepository.class
+com\jrr\alquiler\repository\ReservaRepository.class
+com\jrr\alquiler\model\Reserva.class
+com\jrr\alquiler\controller\ClienteController.class
+com\jrr\alquiler\repository\VehiculoRepository.class
+com\jrr\alquiler\controller\VehiculoController.class
+com\jrr\alquiler\ServidorSpringbootApplication.class
+com\jrr\alquiler\controller\ReservaController.class
+com\jrr\alquiler\model\Vehiculo.class

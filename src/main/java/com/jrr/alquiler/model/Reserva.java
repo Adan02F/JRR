@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "reserva")
-@JsonIgnoreProperties({"cliente", "vehiculo"}) // evita ciclos al listar
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
