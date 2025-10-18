@@ -9,4 +9,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     List<Reserva> findByVehiculoId(Long vehiculoId);
     List<Reserva> findByClienteId(Long clienteId);
     List<Reserva> findByFechaInicioLessThanEqualAndFechaFinGreaterThanEqual(LocalDate inicio, LocalDate fin);
+	boolean existsByClienteId(Long clienteId);
+    boolean existsByVehiculoId(Long vehiculoId);
 }

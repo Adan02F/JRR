@@ -15,14 +15,17 @@ public class Reserva {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private String estado;
+	
+	@ManyToOne
+	@JoinColumn(name = "vehiculo_id", nullable = false,
+				foreignKey = @ForeignKey(name = "fk_reserva_vehiculo"))
+	private Vehiculo vehiculo;
 
-    @ManyToOne
-    @JoinColumn(name = "vehiculo_id")
-    private Vehiculo vehiculo;
+	@ManyToOne
+	@JoinColumn(name = "cliente_id", nullable = false,
+				foreignKey = @ForeignKey(name = "fk_reserva_cliente"))
+	private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
 
     public Reserva() {}
 
